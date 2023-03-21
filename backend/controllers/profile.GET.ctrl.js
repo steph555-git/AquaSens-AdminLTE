@@ -7,7 +7,6 @@ const profileGETCtrl = async (req, res, next) => {
     const biomassMin = (volumeM3 * 20).toFixed(2)
     const biomassMax = (volumeM3 * 25).toFixed(2)
     const templateData = { 'title': 'AquaSens | Profile', resultsGETQuery, 'volumeTank': volumeTank, 'biomassMin': biomassMin, 'biomassMax': biomassMax, 'volumeM3': volumeM3 }
-    console.log(templateData)
     res.render('profile', templateData)
 }
 
