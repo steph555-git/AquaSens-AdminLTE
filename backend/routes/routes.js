@@ -10,7 +10,6 @@ const contactUsGETCtrl = require('../controllers/contactUs.GET.ctrl')
 const chartsGETCtrl = require('../controllers/charts.GET.ctrl')
 const calendarGETCtrl = require('../controllers/calendar.GET.ctrl')
 
-
 router.route('/')
     .get(indexGETCtrl)
 

@@ -1,5 +1,6 @@
 const MongoClient = require('mongodb').MongoClient
-const { AQUASENSDB_USER, AQUASENSDB_PASSWORD } = process.env
+
+const { AQUASENSDB_USER, AQUASENSDB_PASSWORD  } = process.env
 
 class initDbConnection {
     constructor() {
@@ -7,7 +8,7 @@ class initDbConnection {
         const dbName = 'AquaSensDB'
         const maxAttempts = 3
         let attemptCount = 0
-
+        
         if (!initDbConnection.instance) {
             initDbConnection.instance = this
         }

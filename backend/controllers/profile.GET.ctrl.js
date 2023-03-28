@@ -7,6 +7,16 @@ const profileGETCtrl = async (req, res, next) => {
     const biomassMin = (volumeM3 * 20).toFixed(2)
     const biomassMax = (volumeM3 * 25).toFixed(2)
     const templateData = { 'title': 'AquaSens | Profile', resultsGETQuery, 'volumeTank': volumeTank, 'biomassMin': biomassMin, 'biomassMax': biomassMax, 'volumeM3': volumeM3 }
+    
+    console.log(resultsGETQuery)
+
+    if (resultsGETQuery.sensors == undefined) {
+        console.log('pas de capteurs enregistés en database')
+    }
+    else {
+        console.log('Voici la liste des capteurs')
+    }
+
     res.render('profile', templateData)
 }
 
