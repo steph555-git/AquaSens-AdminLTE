@@ -1,11 +1,9 @@
-const db = require('../app')
+const User = require('../models/User')
 
 const getQueryFullName = async () => {
     try {
-        const usersCollection = db.db.collection('users')
-
-        const query = { username: 'horlogerie@alabonneheure.fr' }
-        const user = await usersCollection.findOne(query)
+        const query = { email: 'horlogerie@alabonneheure.fr' }
+        const user = await User.findOne(query)
         return user
     }
     catch (e) {

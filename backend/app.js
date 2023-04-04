@@ -7,11 +7,11 @@ const hbs = require('hbs')
 require('dotenv').config()
 
 const initDbConnection = require('./database/db-connect')
-//Initialize db connection above with logs (succes,error)!
+
 const db = new initDbConnection()
 module.exports = db
 
-const indexRouter = require('./routes/routes')
+const routes = require('./routes/routes')
 
 const app = express()
 
@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter)
+app.use('/', routes)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
