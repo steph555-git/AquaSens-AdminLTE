@@ -19,7 +19,6 @@ const profileGETCtrl = async (req, res, next) => {
         else {
             console.log('Voici la liste des capteurs')
         }
-
         res.render('profile', templateData)
     }
 
