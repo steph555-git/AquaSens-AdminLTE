@@ -224,7 +224,7 @@
                 <div class="header" style="text-align: right;">
                   <a href="#"><i class="fas fa-edit"></i></a>
                 </div>
-                <h3 style="text-align: center;">15°C</h3>
+                <h3 style="text-align: center;" id="tempCard1">-°C</h3>
 
                 <p style="text-align: center;">#1 Sensor</p>
 
@@ -240,7 +240,7 @@
                 <div class="header" style="text-align: right;">
                   <i class="fas fa-edit"></i>
                 </div>
-                <h3 style="text-align: center;">10°C</h3>
+                <h3 style="text-align: center;" id="tempCard2">-°C</h3>
 
                 <p style="text-align: center;">#2 Sensor</p>
               </div>
@@ -254,7 +254,7 @@
                 <div class="header" style="text-align: right;">
                   <i class="fas fa-edit"></i>
                 </div>
-                <h3 style="text-align: center;">9°C</h3>
+                <h3 style="text-align: center;" id="tempCard3">-°C</h3>
 
                 <p style="text-align: center;">#3 Sensor</p>
               </div>
@@ -581,7 +581,11 @@
 <!-- FontAwesome -->
 <script src="https://kit.fontawesome.com/c50fdf0b57.js" crossorigin="anonymous"></script>
 <!-- Index.js Weather manager -->
-<script src="../plugins/weather.js"></script>
+<script src="../javascripts/weather.js"></script>
+<!-- CDN SocketIO -->
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<!-- Index.js -->
+<script src="../javascripts/index.js"></script>
 <script>
   $(function () {
     /*

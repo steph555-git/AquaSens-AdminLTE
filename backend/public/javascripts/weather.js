@@ -1,6 +1,7 @@
 
-/* script pour l'affichage de la meteo*/
-fetch('http://api.weatherapi.com/v1/forecast.json?key=19d2956476524ba387d91946231002&q=32.0618402,35.0531672&lang=en&days=3')
+const urlWeatherAPI = `http://api.weatherapi.com/v1/forecast.json?key=19d2956476524ba387d91946231002&q=32.0618402,35.0531672&lang=en&days=3`
+
+fetch(urlWeatherAPI)
   .then((resp) => {
     resp.json()
       .then((data) => {
@@ -34,12 +35,12 @@ fetch('http://api.weatherapi.com/v1/forecast.json?key=19d2956476524ba387d9194623
         tempMeteo.innerHTML = data.current.temp_c + "&#176;"
         condMeteo.textContent = data.current.condition.text
         imageMeteo.src = data.current.condition.icon
-    
+
         humidity.innerHTML = '<i class="fa-solid fa-droplet"></i>&nbsp;&nbsp;&nbsp;&nbsp;' + data.current.humidity + '%'
         wind.innerHTML = '<i class="fa-solid fa-wind"></i>&nbsp;&nbsp;' + data.current.wind_kph + ' km/h'
         atm.innerHTML = '<i class="fa-solid fa-sun"></i>&nbsp;&nbsp;' + data.current.pressure_mb + ' hPa'
 
-        //PREVISION
+        //FORECAST
         date1.textContent = data.forecast.forecastday[0].date
         date2.textContent = data.forecast.forecastday[1].date
         date3.textContent = data.forecast.forecastday[2].date

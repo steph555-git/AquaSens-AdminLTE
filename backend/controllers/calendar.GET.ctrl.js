@@ -1,4 +1,4 @@
-const calendarGET = require('../businessLogic/getQuery')
+const calendarGET = require('../businessLogic/getUserQuery')
 
 const calendarGETCtrl = async (req, res, next) => {
     const resultsGETQuery = await calendarGET()

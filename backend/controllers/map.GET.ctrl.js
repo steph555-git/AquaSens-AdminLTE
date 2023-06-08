@@ -1,4 +1,4 @@
-const mapGET = require('../businessLogic/getQuery')
+const mapGET = require('../businessLogic/getUserQuery')
 
 const mapGETCtrl = async (req, res, next) => {
     const resultsGETQuery = await mapGET()

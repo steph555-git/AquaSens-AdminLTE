@@ -1,4 +1,4 @@
-const chartsGET = require('../businessLogic/getQuery')
+const chartsGET = require('../businessLogic/getUserQuery')
 
 const chartsGETCtrl = async (req, res, next) => {
     const resultsGETQuery = await chartsGET()

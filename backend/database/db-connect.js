@@ -1,4 +1,4 @@
-const MongoClient = require('mongodb').MongoClient
+const mongoose = require('mongoose')
 const { AQUASENSDB_USER, AQUASENSDB_PASSWORD } = process.env
 
 class initDbConnection {
@@ -11,21 +11,27 @@ class initDbConnection {
         if (!initDbConnection.instance) {
             initDbConnection.instance = this
         }
-        while (attemptCount < maxAttempts) {
+
+        const connectWithRetry = async () => {
             try {
-                this.dbClient = new MongoClient(uri)
-                this.dbClient.connect()
-                this.db = this.dbClient.db(dbName)
-                console.log('Connected to database MongoDB successfully')
-                break
-            } catch (error) {
+                await mongoose.connect(uri)
+                console.log('Connected database successfully')
+                this.db = mongoose.connection.db
+            }
+            catch (error) {
                 console.log(error)
                 attemptCount++
-                new Promise(resolve => setTimeout(resolve, 2000))
+                if (attemptCount < maxAttempts) {
+                    console.log(`Retrying after 2 seconds. Attempt ${attemptCount} of ${maxAttempts}`)
+                    setTimeout(connectWithRetry, 2000)
+                }
             }
-        }
+        };
+
+        connectWithRetry()
+
         return initDbConnection.instance
     }
 }
 
-module.exports = initDbConnection 
+module.exports = initDbConnection
