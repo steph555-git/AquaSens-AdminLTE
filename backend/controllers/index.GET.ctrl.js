@@ -1,4 +1,4 @@
-const dashboardGET = require('../businessLogic/getQuery')
+const dashboardGET = require('../businessLogic/getUserQuery')
 
 const indexGETCtrl = async (req, res, next) => {
     const resultsGETQuery = await dashboardGET()

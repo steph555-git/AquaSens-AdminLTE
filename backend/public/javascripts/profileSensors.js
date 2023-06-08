@@ -20,27 +20,47 @@ const generateTableHTML = (dataSensorsList) => {
         tblBody.appendChild(row)
     }
     tbl.appendChild(tblBody)
-    progressBar.setAttribute("style", "width: 66%")
-    progressBar.textContent = "66%"
+    setTimeout(progressBarAdvanced(66), 2000)
 }
 
-const checkIfSensorsAreResisterInDB = (dataSensorsList) => {
-    console.log(dataSensorsList)
-    const sensorsID = []
-    for (i = 0; i < dataSensorsList.length; i++) {
-        sensorsID.push(dataSensorsList[i].id)
+const checkIfSensorsAreRegisterInDB = async (dataSensorsList) => {
+    try {
+        console.log(dataSensorsList)
+        const sensorsID = []
+        for (i = 0; i < dataSensorsList.length; i++) {
+            sensorsID.push(dataSensorsList[i].id)
+        }
+        const getUserData = await fetch('/profile/sensors')
+        const userData = await getUserData.json()
 
+        console.log('Sensors List', userData.sensors)
+
+        if (userData.sensors == undefined) {
+            setTimeout(progressBarAdvanced(75), 2000)
+            return false
+        }
+        else {
+            setTimeout(progressBarAdvanced(75), 2000)
+            return userData.sensors
+        }
+    } catch (error) {
+        console.log('err', error)
     }
-    console.log(sensorsID)
+}
+
+const progressBarAdvanced = (value) => {
+    progressBar.setAttribute("style", `width: ${value}%`)
+    progressBar.textContent = `${value}%`
 }
 
 sensorsButton.addEventListener('click', async (e) => {
+
     try {
         imgArrowsRotate.className = "fas fa-solid fa-sync fa-spin"
-        progressBar.setAttribute("style", "width: 33%")
-        progressBar.textContent = "33%"
+        progressBarAdvanced(33)
         document.getElementById("sensorsTbody").innerHTML = ''
         const response = await fetch('http://192.168.1.4:4000/api/sensors')
+
         const dataSensorsList = await response.json()
 
         for (let i = 0; i < dataSensorsList.length; i++) {
@@ -52,7 +72,21 @@ sensorsButton.addEventListener('click', async (e) => {
 
         generateTableHTML(dataSensorsList)
 
-        checkIfSensorsAreResisterInDB(dataSensorsList)
+        const checkIfSensorsAreRegisterInDataBase = await checkIfSensorsAreRegisterInDB(dataSensorsList)
+        if (!checkIfSensorsAreRegisterInDataBase) {
+            // any sensors are registers in database
+
+            for (let i = 0; i < dataSensorsList.length; i++) {
+                const tbl = document.getElementById("sensorsTable").rows[i + 1].cells[3]
+                tbl.innerHTML = '<span class="badge bg-danger">Not register</span>'
+            }
+            console.log('Nothing is register')
+            progressBarAdvanced(100)
+        } else {
+            // some sensors are registers : check wish one ?
+            console.log(checkIfSensorsAreRegisterInDataBase)
+            progressBarAdvanced(100)
+        }
 
         imgArrowsRotate.className = "fa-solid fa-arrows-rotate"
         toastr.success('Generating list of sensors successfully', 'Successful')

@@ -1,4 +1,4 @@
-const constactsGET = require('../businessLogic/getQuery')
+const constactsGET = require('../businessLogic/getUserQuery')
 
 const contactsGETCtrl = async (req, res, next) => {
     const resultsGETQuery = await constactsGET()
